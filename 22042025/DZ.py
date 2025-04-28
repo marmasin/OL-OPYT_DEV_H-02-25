@@ -83,7 +83,7 @@ def save_image(image: Image.Image, path: str) -> None:
 # --- GLAVNI DIO PROGRAMA ---
 if __name__ == "__main__":
     # TODO: Zamijeni putanje sa stvarnim lokacijama svojih slika
-    image_paths = ["slika1.jpg", "slika2.jpg", "slika3.jpg", "slika4.jpg"]
+    image_paths = r"22042025\myPhotos\AWDMM01.jpg"
 
     for path in image_paths:
         if not os.path.exists(path):
@@ -93,3 +93,5 @@ if __name__ == "__main__":
     collage = create_collage(images)
     collage = add_signature(collage)
     save_image(collage, "kolaz_uspomene_funkcije.jpg")
+
+
