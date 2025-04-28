@@ -9,18 +9,35 @@ BORDER_SIZE = 5
 BACKGROUND_COLOR = (255, 255, 255)
 TEXT_COLOR = (255, 255, 255, 180)
 TEXT_CONTENT = "Uspomene 2025"
-FONT_PATH = "arial.ttf"  # prilagodi putanju ako treba
+FONT_PATH = r"C:\Windows\Fonts\arial.ttf"  # prilagodi putanju ako treba
 
 def load_images(image_paths: list[str]) -> list[Image.Image]:
+    load_images = []
+    for i in image_paths:
+        slika = Image.open(i)
+        load_images.append(slika)        
+    return load_images 
     """
     Učitava slike iz zadanih putanja.
 
     :param image_paths: lista putanja do slika koje se žele učitati.
     :return: lista PIL.Image objekata.
     """
-    pass
 
 def resize_image(image: Image.Image, max_size: int) -> Image.Image:
+    imagesize = load_images
+    for image in imagesize:
+        width, height = image.size
+        ratio = float(width) / float(height)
+        if width > height:
+            width = QUADRANT_SIZE
+            new_height = height * float(ratio)
+            image = image.resize((width, new_height), Image.ANTIALIAS)
+        else:
+            height = QUADRANT_SIZE
+            new_width = width * float(ratio)
+            image = image.resize((new_width, height), Image.ANTIALIAS)
+    
     """
     Proporcionalno smanjuje sliku da stane u kvadrat danih dimenzija.
 
@@ -28,7 +45,6 @@ def resize_image(image: Image.Image, max_size: int) -> Image.Image:
     :param max_size: Maksimalna širina/visina kvadranta.
     :return: Smanjena slika.
     """
-    pass
 
 def add_border(image: Image.Image, border_size: int = BORDER_SIZE, color: tuple[int, int, int] = (0, 0, 0)) -> Image.Image:
     """
@@ -83,7 +99,7 @@ def save_image(image: Image.Image, path: str) -> None:
 # --- GLAVNI DIO PROGRAMA ---
 if __name__ == "__main__":
     # TODO: Zamijeni putanje sa stvarnim lokacijama svojih slika
-    image_paths = r"22042025\myPhotos\AWDMM01.jpg"
+    image_paths = r"22042025\myPhotos\AWDMM01.jpg", r"22042025\myPhotos\AWDMM02.jpg", r"22042025\myPhotos\AWDMM03.jpg", r"22042025\myPhotos\AWDMM04.jpg"
 
     for path in image_paths:
         if not os.path.exists(path):
